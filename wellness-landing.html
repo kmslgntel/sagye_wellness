@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Verdure — 일상에 스며드는 웰니스 코칭</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ec;
+    --bg-alt: #ece7dc;
+    --ink: #1f2a24;
+    --ink-soft: #4a544c;
+    --moss: #2f4034;
+    --sage: #7a8f7a;
+    --clay: #b8694e;
+    --cream: #fbf8f1;
+    --line: rgba(31, 42, 36, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .italic { font-style: italic; font-variation-settings: "opsz" 144; }
+
+  /* === NAVIGATION === */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(245, 242, 236, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-mark {
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--moss);
+    border-radius: 50%;
+    position: relative;
+  }
+  .logo-mark::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: var(--moss);
+    border-radius: 50%;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--moss); }
+
+  .nav-cta {
+    padding: 10px 22px;
+    background: var(--moss);
+    color: var(--cream);
+    text-decoration: none;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--ink); }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    padding: 140px 48px 80px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: var(--bg-alt);
+    border-radius: 100px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--clay);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 6.5vw, 92px);
+    margin-bottom: 32px;
+  }
+
+  .hero h1 .italic {
+    color: var(--moss);
+  }
+
+  .hero-desc {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 64px;
+  }
+
+  .btn-primary {
+    padding: 16px 32px;
+    background: var(--moss);
+    color: var(--cream);
+    text-decoration: none;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover {
+    background: var(--ink);
+    transform: translateY(-2px);
+  }
+  .btn-primary::after {
+    content: '→';
+    transition: transform 0.3s;
+  }
+  .btn-primary:hover::after { transform: translateX(4px); }
+
+  .btn-secondary {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 16px 8px;
+    border-bottom: 1px solid var(--ink);
+    transition: opacity 0.3s;
+  }
+  .btn-secondary:hover { opacity: 0.6; }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--moss);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* === HERO VISUAL === */
+  .hero-visual {
+    position: relative;
+    height: 600px;
+  }
+
+  .visual-card {
+    position: absolute;
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 20px 60px -20px rgba(31, 42, 36, 0.2);
+  }
+
+  .visual-main {
+    inset: 0;
+    background: linear-gradient(135deg, #2f4034 0%, #4a5d4e 100%);
+    border-radius: 32px;
+    overflow: hidden;
+    padding: 40px;
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .visual-main::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(184, 105, 78, 0.3) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    border-radius: 50%;
+  }
+
+  .breath-circle {
+    width: 180px;
+    height: 180px;
+    border: 1px solid rgba(251, 248, 241, 0.3);
+    border-radius: 50%;
+    margin: 40px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: breathe 5s ease-in-out infinite;
+  }
+  .breath-circle::before {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(251, 248, 241, 0.4);
+    border-radius: 50%;
+  }
+  .breath-circle::after {
+    content: '';
+    position: absolute;
+    inset: 50px;
+    background: rgba(251, 248, 241, 0.15);
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(0.9); }
+    50% { transform: scale(1.05); }
+  }
+
+  .breath-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    text-align: center;
+    opacity: 0.7;
+    margin-bottom: 12px;
+  }
+
+  .visual-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 2;
+  }
+  .visual-meta-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.6;
+    margin-bottom: 8px;
+  }
+  .visual-meta-value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+  }
+
+  .floating-card-1 {
+    bottom: 40px;
+    left: -40px;
+    width: 220px;
+    z-index: 3;
+    animation: float 6s ease-in-out infinite;
+  }
+  .floating-card-2 {
+    top: 60px;
+    right: -20px;
+    width: 200px;
+    z-index: 3;
+    animation: float 6s ease-in-out infinite 1.5s;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .mini-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .mini-stat-label {
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .mini-stat-val {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--moss);
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--bg-alt);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--moss);
+    border-radius: 100px;
+    width: 72%;
+  }
+
+  /* === SECTION TITLES === */
+  .section-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--clay);
+    margin-bottom: 24px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--clay);
+  }
+
+  /* === PHILOSOPHY === */
+  .philosophy {
+    padding: 120px 48px;
+    background: var(--cream);
+    position: relative;
+  }
+  .philosophy-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .philosophy h2 {
+    font-size: clamp(36px, 4vw, 56px);
+  }
+  .philosophy-text p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  .philosophy-text p:first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    float: left;
+    line-height: 1;
+    padding: 6px 12px 0 0;
+    color: var(--moss);
+  }
+
+  /* === SERVICES === */
+  .services {
+    padding: 120px 48px;
+  }
+  .services-header {
+    max-width: 1200px;
+    margin: 0 auto 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+  }
+  .services-header h2 {
+    font-size: clamp(40px, 5vw, 64px);
+  }
+  .services-header p {
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .services-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    padding: 40px 32px;
+    background: var(--cream);
+    border-radius: 20px;
+    position: relative;
+    transition: all 0.4s;
+    cursor: pointer;
+    border: 1px solid var(--line);
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px -20px rgba(31, 42, 36, 0.15);
+  }
+
+  .service-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--clay);
+    font-size: 14px;
+    margin-bottom: 32px;
+    display: block;
+  }
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: var(--bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    color: var(--moss);
+  }
+  .service-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .service-card p {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .service-link {
+    font-size: 13px;
+    color: var(--moss);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s;
+  }
+  .service-card:hover .service-link { gap: 14px; }
+
+  /* === PROCESS === */
+  .process {
+    padding: 120px 48px;
+    background: var(--moss);
+    color: var(--cream);
+  }
+  .process-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .process h2 {
+    font-size: clamp(40px, 5vw, 64px);
+    margin-bottom: 80px;
+    max-width: 700px;
+  }
+  .process .section-label {
+    color: #d4a692;
+  }
+  .process .section-label::before { background: #d4a692; }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    right: 24px;
+    height: 1px;
+    background: rgba(251, 248, 241, 0.2);
+  }
+
+  .step {
+    position: relative;
+  }
+  .step-circle {
+    width: 48px;
+    height: 48px;
+    background: var(--moss);
+    border: 1px solid rgba(251, 248, 241, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .step h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .step p {
+    color: rgba(251, 248, 241, 0.7);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* === TESTIMONIAL === */
+  .testimonial {
+    padding: 120px 48px;
+    background: var(--bg);
+  }
+  .testimonial-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .testimonial-quote {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin-bottom: 40px;
+    color: var(--ink);
+  }
+  .testimonial-quote::before, .testimonial-quote::after {
+    color: var(--clay);
+    font-style: italic;
+  }
+  .testimonial-quote::before { content: '"'; }
+  .testimonial-quote::after { content: '"'; }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sage), var(--moss));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cream);
+    font-family: 'Fraunces', serif;
+  }
+  .author-info {
+    text-align: left;
+  }
+  .author-name {
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .author-role {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+
+  /* === CTA === */
+  .cta {
+    padding: 140px 48px;
+    background: var(--cream);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(122, 143, 122, 0.15) 0%, transparent 60%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+  .cta-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .cta h2 {
+    font-size: clamp(44px, 6vw, 80px);
+    margin-bottom: 28px;
+  }
+  .cta p {
+    font-size: 18px;
+    color: var(--ink-soft);
+    margin-bottom: 40px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* === FOOTER === */
+  footer {
+    padding: 60px 48px 32px;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  footer .logo { color: var(--cream); margin-bottom: 16px; }
+  footer .logo-mark { border-color: var(--cream); }
+  footer .logo-mark::after { background: var(--cream); }
+  .footer-tagline {
+    color: rgba(251, 248, 241, 0.6);
+    font-size: 14px;
+    max-width: 280px;
+    line-height: 1.6;
+  }
+  .footer-col h5 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 20px;
+    color: rgba(251, 248, 241, 0.5);
+    font-weight: 500;
+  }
+  .footer-col ul {
+    list-style: none;
+  }
+  .footer-col li {
+    margin-bottom: 12px;
+  }
+  .footer-col a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  .footer-col a:hover { opacity: 1; }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 32px;
+    border-top: 1px solid rgba(251, 248, 241, 0.1);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(251, 248, 241, 0.5);
+  }
+
+  /* === ANIMATIONS === */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s forwards;
+  }
+  .delay-1 { animation-delay: 0.2s; }
+  .delay-2 { animation-delay: 0.4s; }
+  .delay-3 { animation-delay: 0.6s; }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 968px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 120px 24px 60px;
+      gap: 60px;
+    }
+    .hero-visual { height: 500px; }
+    .philosophy, .services, .process, .testimonial, .cta { padding: 80px 24px; }
+    .philosophy-grid, .services-header { grid-template-columns: 1fr; gap: 32px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .process-steps::before { display: none; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+    <div class="logo-mark"></div>
+    Verdure
+  </div>
+  <ul class="nav-links">
+    <li><a href="#philosophy">철학</a></li>
+    <li><a href="#services">프로그램</a></li>
+    <li><a href="#process">진행 과정</a></li>
+    <li><a href="#contact">문의</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">상담 예약</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag fade-up">현재 2026년 봄 코호트 모집 중</div>
+    <h1 class="display fade-up delay-1">
+      잘 사는 일은<br>
+      <span class="italic">조용한 연습</span>에서<br>
+      시작됩니다.
+    </h1>
+    <p class="hero-desc fade-up delay-2">
+      Verdure는 임상심리 전문가와 호흡·수면 코치가 함께 설계한 12주 웰니스 프로그램입니다.
+      바쁜 일상 속에서도 지속 가능한 회복의 루틴을 만들어 드립니다.
+    </p>
+    <div class="hero-actions fade-up delay-3">
+      <a href="#cta" class="btn-primary">무료 상담 예약하기</a>
+      <a href="#services" class="btn-secondary">프로그램 살펴보기</a>
+    </div>
+    <div class="hero-stats fade-up delay-3">
+      <div>
+        <span class="stat-num">1,240+</span>
+        <span class="stat-label">누적 코칭 사례</span>
+      </div>
+      <div>
+        <span class="stat-num">94%</span>
+        <span class="stat-label">12주 완주율</span>
+      </div>
+      <div>
+        <span class="stat-num">4.9</span>
+        <span class="stat-label">평균 만족도</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="visual-card visual-main">
+      <div>
+        <div class="visual-meta-label">오늘의 세션</div>
+        <div class="visual-meta-value italic">Evening Reset</div>
+      </div>
+      <div>
+        <div class="breath-label">숨을 따라가세요</div>
+        <div class="breath-circle"></div>
+      </div>
+      <div class="visual-meta">
+        <div>
+          <div class="visual-meta-label">소요 시간</div>
+          <div class="visual-meta-value">12 min</div>
+        </div>
+        <div style="text-align: right;">
+          <div class="visual-meta-label">강도</div>
+          <div class="visual-meta-value">Gentle</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="visual-card floating-card-1">
+      <div class="mini-stat">
+        <span class="mini-stat-label">이번 주 수면 점수</span>
+      </div>
+      <div class="mini-stat-val" style="font-size: 32px;">82</div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <div style="font-size: 12px; color: var(--ink-soft); margin-top: 10px;">지난주 대비 +14%</div>
+    </div>
+
+    <div class="visual-card floating-card-2">
+      <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); margin-bottom: 12px;">코치 메시지</div>
+      <div style="font-family: 'Fraunces', serif; font-size: 15px; font-style: italic; line-height: 1.5; color: var(--ink);">
+        "오늘 오후의 산책, 잊지 마세요."
+      </div>
+      <div style="font-size: 12px; color: var(--moss); margin-top: 12px; font-weight: 500;">— 김유진 코치</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-grid">
+    <div>
+      <div class="section-label">우리의 철학</div>
+      <h2 class="display">건강은 결심이 아니라 <span class="italic">습관의 결</span>입니다.</h2>
+    </div>
+    <div class="philosophy-text">
+      <p>
+        많은 이들이 건강을 단기 프로젝트로 접근합니다. 하지만 진짜 변화는 매일의 작은 선택이
+        모여 만들어집니다. Verdure는 의지력을 시험하는 대신, 당신의 일상에 자연스럽게 녹아드는 회복의 리듬을 함께 설계합니다.
+      </p>
+      <p>
+        우리는 수면, 호흡, 영양, 움직임이라는 네 가지 기둥을 중심으로 개인 맞춤형 프로토콜을 제공합니다.
+        과학적 근거에 기반하되, 당신의 라이프스타일을 존중합니다. 그것이 12주 후에도, 12개월 후에도 지속되는
+        변화의 비결이라고 믿습니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label">코어 프로그램</div>
+      <h2 class="display">당신에게 맞는 <br><span class="italic">속도</span>를 찾습니다.</h2>
+    </div>
+    <p>
+      세 가지 트랙은 각기 다른 삶의 단계에 있는 분들을 위해 설계되었습니다.
+      모든 프로그램은 전담 코치 1:1 매칭과 주간 리뷰가 기본으로 포함됩니다.
+    </p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-num">— 01</span>
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/>
+        </svg>
+      </div>
+      <h3>Reset Foundation</h3>
+      <p>번아웃에서 회복이 필요한 분들을 위한 기초 트랙. 수면과 호흡을 중심으로 한 4주 집중 프로그램입니다.</p>
+      <a href="#" class="service-link">자세히 보기 →</a>
+    </div>
+
+    <div class="service-card">
+      <span class="service-num">— 02</span>
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </div>
+      <h3>Rhythm Builder</h3>
+      <p>지속 가능한 루틴을 만들고 싶은 분들을 위한 메인 트랙. 12주 동안 네 가지 기둥을 통합적으로 다룹니다.</p>
+      <a href="#" class="service-link">자세히 보기 →</a>
+    </div>
+
+    <div class="service-card">
+      <span class="service-num">— 03</span>
+      <div class="service-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      <h3>Peak Performance</h3>
+      <p>임원·창업가를 위한 고강도 트랙. 인지 수행능력 최적화와 회복 사이의 균형을 24주 동안 정교하게 다듬습니다.</p>
+      <a href="#" class="service-link">자세히 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-inner">
+    <div class="section-label">진행 과정</div>
+    <h2 class="display">네 단계로 만나는 <span class="italic">당신의 리듬.</span></h2>
+
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-circle">01</div>
+        <h4>진단</h4>
+        <p>수면·스트레스·생활 패턴을 다각도로 분석하는 60분 초기 세션을 진행합니다.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle">02</div>
+        <h4>설계</h4>
+        <p>분석 결과를 바탕으로 당신만을 위한 12주 프로토콜과 주간 리듬을 구성합니다.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle">03</div>
+        <h4>실행</h4>
+        <p>전담 코치와 주 1회 체크인, 데일리 마이크로 액션으로 변화를 쌓아갑니다.</p>
+      </div>
+      <div class="step">
+        <div class="step-circle">04</div>
+        <h4>정착</h4>
+        <p>12주 후 종합 리뷰와 함께, 코치 없이도 유지할 수 있는 자기 루틴을 완성합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="testimonial-inner">
+    <div class="section-label" style="justify-content: center;">고객 후기</div>
+    <p class="testimonial-quote display">
+      처음에는 단순한 수면 코칭이라고 생각했어요. 하지만 12주가 지나고 보니, 일을 대하는 태도와 가족과의 시간까지 모두 달라져 있었습니다.
+    </p>
+    <div class="testimonial-author">
+      <div class="author-avatar">L</div>
+      <div class="author-info">
+        <div class="author-name">이수경 님</div>
+        <div class="author-role">스타트업 대표 · Rhythm Builder 수료</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="cta-inner">
+    <div class="section-label" style="justify-content: center;">시작하기</div>
+    <h2 class="display">
+      오늘의 작은 호흡이<br>
+      <span class="italic">내일의 당신</span>을 만듭니다.
+    </h2>
+    <p>30분 무료 상담을 통해 현재 상태를 진단하고, 어떤 트랙이 가장 잘 맞을지 함께 살펴봅니다. 부담 없이 신청해 주세요.</p>
+    <a href="#" class="btn-primary">무료 상담 예약하기</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div class="logo"><div class="logo-mark"></div>Verdure</div>
+      <p class="footer-tagline">조용한 연습으로 만드는 지속 가능한 웰니스. 2024년부터 1,200명 이상의 회복을 동행해 왔습니다.</p>
+    </div>
+    <div class="footer-col">
+      <h5>프로그램</h5>
+      <ul>
+        <li><a href="#">Reset Foundation</a></li>
+        <li><a href="#">Rhythm Builder</a></li>
+        <li><a href="#">Peak Performance</a></li>
+        <li><a href="#">기업 워크샵</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>회사</h5>
+      <ul>
+        <li><a href="#">철학과 팀</a></li>
+        <li><a href="#">코치 소개</a></li>
+        <li><a href="#">저널</a></li>
+        <li><a href="#">채용</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>연락처</h5>
+      <ul>
+        <li><a href="#">hello@verdure.kr</a></li>
+        <li><a href="#">02-1234-5678</a></li>
+        <li><a href="#">서울시 성수동</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Verdure Wellness. All rights reserved.</div>
+    <div>개인정보처리방침 · 이용약관</div>
+  </div>
+</footer>
+
+</body>
+</html>
